@@ -14,6 +14,7 @@ import { AppProps } from "./models/TypeAppProps";
 
 
 function App(props: AppProps) {
+  
   useEffect(() => {
     console.log(props.isLoggedIn);
   }, [props.isLoggedIn])
