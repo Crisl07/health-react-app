@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import SimpleMenu from "../Menu/Menu";
 import { useStyles } from "./HeaderStyles";
 import { useHistory } from "react-router-dom";
 
@@ -34,9 +35,9 @@ export default function Header() {
               My Wellness Activities
             </Link>
           </nav>
-          <Button href="#" color="primary" variant="outlined" className={classes.link}>
-            Sign Out
-          </Button>
+          <SimpleMenu 
+            handleChange={handleChangeRoutes}
+          />
         </Toolbar>
       </AppBar>
     </React.Fragment>

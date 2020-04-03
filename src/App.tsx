@@ -11,10 +11,11 @@ import MedicHistory from "./components/MedicHistory/MedicHistory";
 import { RootState } from './redux/reducers';
 import { logIn, IsLoggedInType, isLoggedInAction } from "./redux/actions/index";
 import { AppProps } from "./models/TypeAppProps";
+import Profile from './components/Profile/Profile';
 
 
 function App(props: AppProps) {
-  
+
   useEffect(() => {
     console.log(props.isLoggedIn);
   }, [props.isLoggedIn])
@@ -37,6 +38,7 @@ function App(props: AppProps) {
           <Route exact path="/sicknesses" component={Sicknesses} />
           <Route exact path="/sicknesses/wellnessplan/:sickness" component={WellnessPlan} />
           <Route exact path="/medicHistory" component={MedicHistory} />
+          <Route exact path="/profile" component={Profile} />
           <Route render={() =>
             <Redirect to="/sicknesses" />}
           />

@@ -19,7 +19,7 @@ export default function MedicHistory() {
       <div className={classes.heroContent}>
           <Container maxWidth="xl">
             <Typography className={classes.typography} component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Medical History <Healing className={classes.fitnessIcon}/>
+              Medic History <Healing className={classes.fitnessIcon}/>
             </Typography>
           </Container>
         </div>
