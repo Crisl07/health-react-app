@@ -9,6 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import { SicknessProps } from "../../models/TypeSicknessProps";
 import { useStyles } from "./CardSicknessStyles";
 import ReadMoreReact from 'read-more-react';
+import { useHistory } from "react-router-dom";
 
 export const CardSickness = memo(({
   name,
@@ -18,9 +19,10 @@ export const CardSickness = memo(({
   id
 }: SicknessProps): JSX.Element => {
   const classes = useStyles();
+  const history = useHistory();
 
   const goToWellnessPlan = (name: string) => {
-    console.log('something');
+    history.push(`/sicknesses/wellnessplan/${name}`);
   }
 
   return (
