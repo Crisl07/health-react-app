@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "CoronaVirus",
+    "scientificNotation": "covid-19",
+    "desc": "Enfermedad super mega peligrosa! millenials!",
+    "img": "https://celiacos.org/wp-content/uploads/2020/03/coronavirus-768x432.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "Sida",
+    "scientificNotation": "VIH",
+    "desc": "use condom guys",
+    "img": "https://statics-cuidateplus.marca.com/sites/default/files/styles/natural/public/vih-sida.jpg?itok=iVg4T7Kg"
+  },
+  {
+    "id": 3,
+    "name": "Influenza A virus subtype",
+    "scientificNotation": "A/H1N1",
+    "desc": "s the subtype of influenza A virus that was the most common cause of human influenza (flu) in 2009, and is associated with the 1918 outbreak known as the Spanish flu.",
+    "img": "https://www.cdc.gov/flu/pandemic-resources/images/H1N1-crop.jpg"
+  }
+]
