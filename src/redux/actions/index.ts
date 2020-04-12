@@ -1,15 +1,27 @@
-import { ActionTypes } from "./actionTypes";
+import { ActionTypes } from "../../types/redux/actionTypes";
+import { signIn } from "../../api/auth";
+import { Dispatch } from "react";
+import { UserProps } from "../../types/components/TypeUserProps";
+import { logInActionProps } from "../../types/redux/TypeLoginActionProps";
 
-export type IsLoggedInType = boolean;
-
-export type isLoggedInAction = {
-  type: ActionTypes.IS_LOGGED_IN;
-  payload: IsLoggedInType;
+export const logIn = (user: UserProps) => {
+  return async (dispatch: Dispatch<logInActionProps>) => {
+    try {
+      const response = await signIn(user);
+      const authProps = {
+        isLoggedIn: true,
+        token: response.data.token,
+        userId: response.data.userId,
+        avatar: response.data.avatar
+      };
+      dispatch({
+        type: ActionTypes.LOG_IN,
+        payload: authProps
+      });
+    } catch (error) { }
+  }
 }
 
-export function logIn(payload: IsLoggedInType) : isLoggedInAction {
-  return {
-    type: ActionTypes.IS_LOGGED_IN,
-    payload,
-  };
-}
+export const logOut = () => ({
+  type: ActionTypes.LOG_OUT
+})

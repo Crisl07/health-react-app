@@ -1,7 +1,7 @@
 export type SicknessProps = {
-  id: string;
+  id?: string;
   name: string;
   scientificNotation: string;
   img: string;
-  desc: string;
+  description: string;
 };

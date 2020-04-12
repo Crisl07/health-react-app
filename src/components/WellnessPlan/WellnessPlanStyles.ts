@@ -6,10 +6,6 @@ export const useStyles = makeStyles((theme) => ({
     color: "white",
     padding: theme.spacing(8, 0, 6),
   },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
   typography: {
     color: "white"
   },

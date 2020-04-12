@@ -7,41 +7,42 @@ import TableRow from '@material-ui/core/TableRow';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import FitnessCenter from "@material-ui/icons/FitnessCenter";
-import Add from "@material-ui/icons/AddBox";
-import { useStyles } from "./WellnessPlanStyles";
-import { useParams } from 'react-router';
+import Star from "@material-ui/icons/Star";
+import { useStyles } from "./FavoriteWellnessActivitiesStyles";
 import { WellnessPlanProps } from '../../types/components/TypeWellnessPlan';
-import { getSicknessWellnessActivities, addUserWellnessActivity } from '../../api/wellnessPlan';
+import { getUserWellnessActivities, deleteUserWellnessActivity } from '../../api/wellnessPlan';
 
-export default function WellnessPlan() {
+export default function FavoriteWellnessActivities() {
   const classes = useStyles();
-  const { id } = useParams();
-  const [wellnessActivities, setWellnessActivities] = useState<WellnessPlanProps[]>([])
+  const [favoriteWellnessActivities, setFavoriteWellnessActivities] = useState<WellnessPlanProps[]>([])
   const [hasWellnessActivities, setHasWellnessActivities] = useState<boolean>(true);
 
-  const addFavorite = async (id: string) => {
+  const deleteFavoriteWellnessActivity = async (id: string) => {
     try {
-      await addUserWellnessActivity(id);
+      await deleteUserWellnessActivity(id);
+      const newFavoriteWellnessActivities = favoriteWellnessActivities.filter(
+        (activity: WellnessPlanProps) => activity.id !== id
+      );
+      setFavoriteWellnessActivities(newFavoriteWellnessActivities);
     } catch (error) { }
   }
 
   useEffect(() => {
     if (hasWellnessActivities) {
-      if (wellnessActivities.length === 0) {
-        getSicknessWellnessActivities(id!)
-          .then((wellnessActivities: WellnessPlanProps[]) => {
-            if (wellnessActivities && wellnessActivities.length > 0) {
-              setWellnessActivities(wellnessActivities);
+      if (favoriteWellnessActivities.length === 0) {
+        getUserWellnessActivities()
+          .then((favoriteWellnessActivities: WellnessPlanProps[]) => {
+            if (favoriteWellnessActivities && favoriteWellnessActivities.length > 0) {
+              setFavoriteWellnessActivities(favoriteWellnessActivities);
               setHasWellnessActivities(false);
             } else {
               setHasWellnessActivities(false);
             }
-          })
-      }
-    }
-  }, [wellnessActivities, hasWellnessActivities, id]);
+          });
+      };
+    };
+  });
 
   return (
     <React.Fragment>
@@ -49,7 +50,7 @@ export default function WellnessPlan() {
       <div className={classes.heroContent}>
         <Container maxWidth="xl">
           <Typography className={classes.typography} component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            Wellness Activities <FitnessCenter className={classes.fitnessIcon} />
+            My Wellness Activities <FitnessCenter className={classes.fitnessIcon} />
           </Typography>
         </Container>
       </div>
@@ -60,23 +61,19 @@ export default function WellnessPlan() {
             <TableCell>Description</TableCell>
             <TableCell>Duration</TableCell>
             <TableCell>Times Per Week</TableCell>
-            <TableCell>Set Favorite</TableCell>
+            <TableCell align="right">Set Favorite</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {wellnessActivities.map((activity: WellnessPlanProps, i: number) => (
-            <TableRow key={i}>
+          {favoriteWellnessActivities.map((activity: WellnessPlanProps) => (
+            <TableRow key={activity.id}>
               <TableCell>{activity.name}</TableCell>
               <TableCell>{activity.description}</TableCell>
               <TableCell>{activity.duration}</TableCell>
               <TableCell>{activity.timesPerWeek}</TableCell>
-              <TableCell>
-                <Button onClick={() => addFavorite(activity.id)}>
-                  <Add />Add Favorite
-                </Button>
-              </TableCell>
-            </TableRow>)
-          )}
+              <TableCell align="right"><Star onClick={() => deleteFavoriteWellnessActivity(activity.id)} /></TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </React.Fragment>

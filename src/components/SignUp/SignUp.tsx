@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { useHistory } from "react-router-dom";
+import React, { useRef, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,21 +10,38 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useStyles } from "./SignUpStyles";
+import { signUp } from "../../api/auth";
+import { history } from "../../App";
+import { RootState } from '../../types/redux/TypeRootState';
+import { Dispatch } from 'redux';
+import { logIn } from '../../redux/actions';
+import { connect } from 'react-redux';
+import { UserProps } from '../../types/components/TypeUserProps';
+import { SignUpProps } from '../../types/components/TypeSignUpProps';
 
-export default function SignUp() {
+function SignUp({ isLoggedIn }: SignUpProps) {
   const classes = useStyles();
-  const inputName = useRef<HTMLInputElement>(null);
-  const inputEmail = useRef<HTMLInputElement>(null);
-  const inputPassword = useRef<HTMLInputElement>(null);
-  const history = useHistory();
+  const name = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
 
-  const SignUpUser = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push("/sicknesses")
+    }
+  })
+
+  const SignUpUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(inputName.current?.value);
-    console.log(inputEmail.current?.value);
-    console.log(inputPassword.current?.value);
-    //RequestSignUp
-    history.push("/signin");
+    const newUser = {
+      name: name.current!.value,
+      email: email.current!.value,
+      password: password.current!.value
+    }
+    try {
+      await signUp(newUser);
+      history.push("/signin");
+    } catch (error) { }
   }
 
   return (
@@ -49,7 +65,7 @@ export default function SignUp() {
                 fullWidth
                 id="fullName"
                 label="Full Name"
-                inputRef={inputName}
+                inputRef={name}
                 autoFocus
               />
             </Grid>
@@ -62,7 +78,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                inputRef={inputEmail}
+                inputRef={email}
               />
             </Grid>
             <Grid item xs={12}>
@@ -75,7 +91,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                inputRef={inputPassword}
+                inputRef={password}
               />
             </Grid>
           </Grid>
@@ -90,7 +106,7 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/signin" variant="body2">
+              <Link onClick={() => history.push("/signin")} variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -102,3 +118,17 @@ export default function SignUp() {
     </Container>
   );
 }
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    isLoggedIn: state.isLoggedIn
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    logIn: (user: UserProps) => dispatch(logIn(user) as any),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

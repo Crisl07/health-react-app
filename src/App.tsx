@@ -1,47 +1,45 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import React from 'react';
+import Header from "./components/Header/Header";
+import SignIn from './components/SignIn/SignIn';
+import createHistory from "history/createBrowserHistory";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import Header from "./components/Header/Header";
-import SignIn from "./components/SignIn/SignIn";
-import SignUp from './components/SignUp/SignUp';
-import Sicknesses from './components/Sicknesses/Sicknesses';
-import WellnessPlan from "./components/WellnessPlan/WellnessPlan";
-import MedicHistory from "./components/MedicHistory/MedicHistory";
-import { RootState } from './redux/reducers';
-import { logIn, IsLoggedInType, isLoggedInAction } from "./redux/actions/index";
-import { AppProps } from "./models/TypeAppProps";
-import Profile from './components/Profile/Profile';
+import { RootState } from './types/redux/TypeRootState';
+import { logIn } from "./redux/actions/index";
+import { AppProps } from "./types/components/TypeAppProps";
+import { UserProps } from './types/components/TypeUserProps';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAxiosInterceptor } from "./api/interceptor";
+import { routes } from "./routes";
+import { RouteProps } from "./types/components/TypeRouteProps";
+import { AppRoutes } from './components/AppRoutes/AppRoutes';
 
+export const history = createHistory();
 
-function App(props: AppProps) {
+toast.configure();
+useAxiosInterceptor();
 
-  useEffect(() => {
-    console.log(props.isLoggedIn);
-  }, [props.isLoggedIn])
-
-  const handleChange = (newIsLoggedIn: boolean) => {
-    props.logIn(newIsLoggedIn);
-  }
+function App({ isLoggedIn }: AppProps) {
 
   return (
-    <Router>
+    <Router history={history}>
       <div>
-        {props.isLoggedIn && (
+        {isLoggedIn && (
           <Header />
         )}
         <Switch>
-          <Route exact path={["/", "/signin"]} render={() =>
-            <SignIn changeIsLoggedIn={handleChange} />}
+          {routes.map((route: RouteProps, key: number) => (
+            <AppRoutes
+              key={key}
+              path={route.path}
+              component={route.component}
+            />)
+          )}
+          <Route exact path={["/", "/signin"]} component={SignIn}
           />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/sicknesses" component={Sicknesses} />
-          <Route exact path="/sicknesses/wellnessplan/:sickness" component={WellnessPlan} />
-          <Route exact path="/medicHistory" component={MedicHistory} />
-          <Route exact path="/profile" component={Profile} />
-          <Route render={() =>
-            <Redirect to="/sicknesses" />}
-          />
+          <Route render={() => <Redirect to="/signin" />} />
         </Switch>
       </div>
     </Router>
@@ -49,12 +47,14 @@ function App(props: AppProps) {
 }
 
 const mapStateToProps = (state: RootState) => {
-  return { isLoggedIn: state.isLoggedIn }
+  return {
+    isLoggedIn: state.isLoggedIn,
+  }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    logIn: (isLoggedIn: IsLoggedInType) => dispatch<isLoggedInAction>(logIn(isLoggedIn)),
+    logIn: (user: UserProps) => dispatch(logIn(user) as any),
   }
 }
 

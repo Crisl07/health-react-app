@@ -14,9 +14,12 @@ export const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   wellnessPlanButton: {
-    alignItems: "center"
+    margin: theme.spacing(1)
   },
   readMore: {
     color: "blue"
+  },
+  button: {
+    alignContent: "center"
   }
 }));

@@ -1,34 +1,41 @@
-import React, { useRef } from 'react';
-import { useHistory } from "react-router-dom";
+import React, { useRef, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { SignInProps } from "../../models/TypeSignInProps";
 import { useStyles } from "./SignInStyles";
+import { AppProps } from "../../types/components/TypeAppProps";
+import { history } from "../../App";
+import { RootState } from '../../types/redux/TypeRootState';
+import { Dispatch } from 'redux';
+import { logIn } from '../../redux/actions';
+import { connect } from 'react-redux';
+import { UserProps } from '../../types/components/TypeUserProps';
 
-export default function SignIn({ changeIsLoggedIn }: SignInProps) {
+function SignIn({ isLoggedIn, logIn }: AppProps) {
   const classes = useStyles();
-  const inputEmail = useRef<HTMLInputElement>(null);
-  const inputPassword = useRef<HTMLInputElement>(null);
-  const history = useHistory();
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push("/sicknesses")
+    }
+  })
 
   const SignInUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isLoggedIn = true;
-    console.log(inputEmail.current?.value);
-    console.log(inputPassword.current?.value);
-    changeIsLoggedIn(isLoggedIn);
-    //RequestSignIn
-    history.push("/sicknesses");
+    const user = {
+      email: email.current!.value,
+      password: password.current!.value
+    }
+    logIn(user);
   }
 
   return (
@@ -52,7 +59,7 @@ export default function SignIn({ changeIsLoggedIn }: SignInProps) {
             name="email"
             autoComplete="email"
             autoFocus
-            inputRef={inputEmail}
+            inputRef={email}
           />
           <TextField
             variant="outlined"
@@ -64,11 +71,7 @@ export default function SignIn({ changeIsLoggedIn }: SignInProps) {
             type="password"
             id="password"
             autoComplete="current-password"
-            inputRef={inputPassword}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            inputRef={password}
           />
           <Button
             type="submit"
@@ -86,7 +89,7 @@ export default function SignIn({ changeIsLoggedIn }: SignInProps) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2">
+              <Link onClick={() => history.push("/signup")} variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
@@ -98,3 +101,17 @@ export default function SignIn({ changeIsLoggedIn }: SignInProps) {
     </Container>
   );
 }
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    isLoggedIn: state.isLoggedIn
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    logIn: (user: UserProps) => dispatch(logIn(user) as any),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
