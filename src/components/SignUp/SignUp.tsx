@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -9,9 +8,9 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { useStyles } from "./SignUpStyles";
-import { signUp } from "../../api/auth";
-import { history } from "../../App";
+import { useStyles } from './SignUpStyles';
+import { signUp } from '../../api/auth';
+import { history } from '../../App';
 import { RootState } from '../../types/redux/TypeRootState';
 import { Dispatch } from 'redux';
 import { logIn } from '../../redux/actions';
@@ -27,26 +26,25 @@ function SignUp({ isLoggedIn }: SignUpProps) {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push("/sicknesses")
+      history.push('/sicknesses');
     }
-  })
+  });
 
   const SignUpUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newUser = {
       name: name.current!.value,
       email: email.current!.value,
-      password: password.current!.value
-    }
+      password: password.current!.value,
+    };
     try {
       await signUp(newUser);
-      history.push("/signin");
-    } catch (error) { }
-  }
+      history.push('/signin');
+    } catch (error) {}
+  };
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -106,29 +104,28 @@ function SignUp({ isLoggedIn }: SignUpProps) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link onClick={() => history.push("/signin")} variant="body2">
+              <Link onClick={() => history.push('/signin')} variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-      </Box>
+      <Box mt={5}></Box>
     </Container>
   );
 }
 
 const mapStateToProps = (state: RootState) => {
   return {
-    isLoggedIn: state.isLoggedIn
-  }
-}
+    isLoggedIn: state.isLoggedIn,
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     logIn: (user: UserProps) => dispatch(logIn(user) as any),
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

@@ -4,52 +4,66 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import FitnessCenter from "@material-ui/icons/FitnessCenter";
-import Add from "@material-ui/icons/AddBox";
-import { useStyles } from "./WellnessPlanStyles";
+import FitnessCenter from '@material-ui/icons/FitnessCenter';
+import Add from '@material-ui/icons/AddBox';
+import { useStyles } from './WellnessPlanStyles';
 import { useParams } from 'react-router';
 import { WellnessPlanProps } from '../../types/components/TypeWellnessPlan';
-import { getSicknessWellnessActivities, addUserWellnessActivity } from '../../api/wellnessPlan';
+import {
+  getSicknessWellnessActivities,
+  addUserWellnessActivity,
+} from '../../api/wellnessPlan';
 
 export default function WellnessPlan() {
   const classes = useStyles();
   const { id } = useParams();
-  const [wellnessActivities, setWellnessActivities] = useState<WellnessPlanProps[]>([])
-  const [hasWellnessActivities, setHasWellnessActivities] = useState<boolean>(true);
+  const [wellnessActivities, setWellnessActivities] = useState<
+    WellnessPlanProps[]
+  >([]);
+  const [hasWellnessActivities, setHasWellnessActivities] = useState<boolean>(
+    true,
+  );
 
   const addFavorite = async (id: string) => {
     try {
       await addUserWellnessActivity(id);
-    } catch (error) { }
-  }
+    } catch (error) {}
+  };
 
   useEffect(() => {
     if (hasWellnessActivities) {
       if (wellnessActivities.length === 0) {
-        getSicknessWellnessActivities(id!)
-          .then((wellnessActivities: WellnessPlanProps[]) => {
+        getSicknessWellnessActivities(id!).then(
+          (wellnessActivities: WellnessPlanProps[]) => {
             if (wellnessActivities && wellnessActivities.length > 0) {
               setWellnessActivities(wellnessActivities);
               setHasWellnessActivities(false);
             } else {
               setHasWellnessActivities(false);
             }
-          })
+          },
+        );
       }
     }
   }, [wellnessActivities, hasWellnessActivities, id]);
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <div className={classes.heroContent}>
         <Container maxWidth="xl">
-          <Typography className={classes.typography} component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            Wellness Activities <FitnessCenter className={classes.fitnessIcon} />
+          <Typography
+            className={classes.typography}
+            component="h1"
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom
+          >
+            Wellness Activities{' '}
+            <FitnessCenter className={classes.fitnessIcon} />
           </Typography>
         </Container>
       </div>
@@ -72,11 +86,12 @@ export default function WellnessPlan() {
               <TableCell>{activity.timesPerWeek}</TableCell>
               <TableCell>
                 <Button onClick={() => addFavorite(activity.id)}>
-                  <Add />Add Favorite
+                  <Add />
+                  Add Favorite
                 </Button>
               </TableCell>
-            </TableRow>)
-          )}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </React.Fragment>

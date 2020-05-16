@@ -1,8 +1,8 @@
-import { ActionTypes } from "../../types/redux/actionTypes";
-import { signIn } from "../../api/auth";
-import { Dispatch } from "react";
-import { UserProps } from "../../types/components/TypeUserProps";
-import { logInActionProps } from "../../types/redux/TypeLoginActionProps";
+import { ActionTypes } from '../../types/redux/actionTypes';
+import { signIn } from '../../api/auth';
+import { Dispatch } from 'react';
+import { UserProps } from '../../types/components/TypeUserProps';
+import { logInActionProps } from '../../types/redux/TypeLoginActionProps';
 
 export const logIn = (user: UserProps) => {
   return async (dispatch: Dispatch<logInActionProps>) => {
@@ -12,16 +12,16 @@ export const logIn = (user: UserProps) => {
         isLoggedIn: true,
         token: response.data.token,
         userId: response.data.userId,
-        avatar: response.data.avatar
+        avatar: response.data.avatar,
       };
       dispatch({
         type: ActionTypes.LOG_IN,
-        payload: authProps
+        payload: authProps,
       });
-    } catch (error) { }
-  }
-}
+    } catch (error) {}
+  };
+};
 
 export const logOut = () => ({
-  type: ActionTypes.LOG_OUT
-})
+  type: ActionTypes.LOG_OUT,
+});

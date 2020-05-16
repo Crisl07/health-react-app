@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -9,9 +8,9 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { useStyles } from "./SignInStyles";
-import { AppProps } from "../../types/components/TypeAppProps";
-import { history } from "../../App";
+import { useStyles } from './SignInStyles';
+import { AppProps } from '../../types/components/TypeAppProps';
+import { history } from '../../App';
 import { RootState } from '../../types/redux/TypeRootState';
 import { Dispatch } from 'redux';
 import { logIn } from '../../redux/actions';
@@ -25,22 +24,21 @@ function SignIn({ isLoggedIn, logIn }: AppProps) {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push("/sicknesses")
+      history.push('/sicknesses');
     }
-  })
+  });
 
   const SignInUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = {
       email: email.current!.value,
-      password: password.current!.value
-    }
+      password: password.current!.value,
+    };
     logIn(user);
-  }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -84,34 +82,36 @@ function SignIn({ isLoggedIn, logIn }: AppProps) {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link
+                onClick={() => history.push('/forgetPassword')}
+                variant="body2"
+              >
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link onClick={() => history.push("/signup")} variant="body2">
+              <Link onClick={() => history.push('/signup')} variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-      </Box>
+      <Box mt={8}></Box>
     </Container>
   );
 }
 
 const mapStateToProps = (state: RootState) => {
   return {
-    isLoggedIn: state.isLoggedIn
-  }
-}
+    isLoggedIn: state.isLoggedIn,
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     logIn: (user: UserProps) => dispatch(logIn(user) as any),
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

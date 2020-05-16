@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { useStyles } from "./NewSicknessStyles";
+import { useStyles } from './NewSicknessStyles';
 import { Container, Button, Box } from '@material-ui/core';
-import { createNewSickness } from "../../api/sicknesses";
-import { history } from "../../App";
+import { createNewSickness } from '../../api/sicknesses';
+import { history } from '../../App';
 
 export default function NewSickness() {
   const classes = useStyles();
@@ -20,22 +19,21 @@ export default function NewSickness() {
       name: name.current!.value,
       scientificNotation: scientificNotation.current!.value,
       img: img.current!.value,
-      description: description.current!.value
-    }
+      description: description.current!.value,
+    };
     try {
       await createNewSickness(newSickness);
-      history.push("/allSicknesses")
+      history.push('/allSicknesses');
     } catch (error) {}
-  }
+  };
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             New Sickness
-        </Typography>
+          </Typography>
           <form className={classes.form} noValidate onSubmit={createSickness}>
             <TextField
               variant="outlined"
@@ -93,11 +91,10 @@ export default function NewSickness() {
               className={classes.submit}
             >
               Save
-          </Button>
+            </Button>
           </form>
         </div>
-        <Box mt={8}>
-        </Box>
+        <Box mt={8}></Box>
       </Container>
     </React.Fragment>
   );

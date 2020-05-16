@@ -6,4 +6,4 @@ export type UserProps = {
   age?: string;
   genre?: string;
   address?: string;
-}
+};

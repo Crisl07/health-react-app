@@ -9,9 +9,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.dark,
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%',
@@ -19,5 +17,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  typography: {
+    margin: theme.spacing(5, 0, 0),
+    textAlign: 'center',
   },
 }));

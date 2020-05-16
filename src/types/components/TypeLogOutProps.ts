@@ -1,3 +1,3 @@
 export type LogOutProps = {
-  logOut: () => void
-}
+  logOut: () => void;
+};

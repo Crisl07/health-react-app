@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   heroContent: {
-    backgroundColor: "#323232",
-    color: "white",
+    backgroundColor: '#323232',
+    color: 'white',
     padding: theme.spacing(8, 0, 6),
   },
   cardGrid: {
@@ -11,15 +11,15 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   typography: {
-    color: "white"
+    color: 'white',
   },
   searchInput: {
-    textAlign: "center"
+    textAlign: 'center',
   },
   hospitalIcon: {
-    fontSize: 30
+    fontSize: 30,
   },
   addbutton: {
-    textAlign: "center"
-  }
+    textAlign: 'center',
+  },
 }));

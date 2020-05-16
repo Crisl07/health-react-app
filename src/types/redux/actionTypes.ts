@@ -1,4 +1,4 @@
-export enum ActionTypes { 
-  LOG_IN = "LOG_IN",
-  LOG_OUT = "LOG_OUT"
+export enum ActionTypes {
+  LOG_IN = 'LOG_IN',
+  LOG_OUT = 'LOG_OUT',
 }

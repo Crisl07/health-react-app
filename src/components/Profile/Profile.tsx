@@ -1,28 +1,27 @@
 import React, { useRef, useEffect, useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
-import { useStyles } from "./ProfileStyles";
+import { useStyles } from './ProfileStyles';
 import { Container, Button, Box, MenuItem } from '@material-ui/core';
 import { UserProps } from '../../types/components/TypeUserProps';
 import { getUserInfo, updateUser } from '../../api/profile';
 import { GenreProps } from '../../types/components/TypeGenreProps';
-import { history } from "../../App";
+import { history } from '../../App';
 
 const genres: GenreProps[] = [
   {
-    value: "male",
-    label: "Male"
+    value: 'male',
+    label: 'Male',
   },
   {
-    value: "female",
-    label: "Female"
+    value: 'female',
+    label: 'Female',
   },
   {
-    value: "prefer not to say",
-    label: "Prefer not to say"
-  }
+    value: 'prefer not to say',
+    label: 'Prefer not to say',
+  },
 ];
 
 export default function Profile() {
@@ -36,13 +35,11 @@ export default function Profile() {
   const address = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState<UserProps | null>(null);
 
-
   useEffect(() => {
     if (!user) {
-      getUserInfo()
-        .then((user: UserProps) => setUser(user))
+      getUserInfo().then((user: UserProps) => setUser(user));
     }
-  }, [user])
+  }, [user]);
 
   const updateUserInfo = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,22 +50,24 @@ export default function Profile() {
       avatar: avatar.current!.value,
       age: age.current!.value,
       genre: genre.current!.value,
-      address: address.current!.value
-    }
+      address: address.current!.value,
+    };
     try {
-      await updateUser(newUserInfo)
-      history.push("/signin");
-    } catch (error) { }
-  }
+      await updateUser(newUserInfo);
+      history.push('/signin');
+    } catch (error) {}
+  };
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
-          <Avatar className={classes.avatar} src={user && user.avatar ? user.avatar : ""} />
+          <Avatar
+            className={classes.avatar}
+            src={user && user.avatar ? user.avatar : ''}
+          />
           <Typography component="h1" variant="h5">
-            {user && user.name ? user.name : "User name"}
+            {user && user.name ? user.name : 'User name'}
           </Typography>
           <form className={classes.form} noValidate onSubmit={updateUserInfo}>
             <TextField
@@ -83,7 +82,7 @@ export default function Profile() {
               color="secondary"
               autoFocus
               placeholder="http://imagenes.com/image.png"
-              defaultValue={user && user.avatar ? user.avatar : ""}
+              defaultValue={user && user.avatar ? user.avatar : ''}
               inputRef={avatar}
             />
             <TextField
@@ -98,7 +97,7 @@ export default function Profile() {
               color="secondary"
               autoFocus
               placeholder="Cristian"
-              defaultValue={user && user.name ? user.name : ""}
+              defaultValue={user && user.name ? user.name : ''}
               inputRef={name}
             />
             <TextField
@@ -113,7 +112,7 @@ export default function Profile() {
               color="secondary"
               autoFocus
               placeholder="cristian@gmail.com"
-              defaultValue={user && user.email ? user.email : ""}
+              defaultValue={user && user.email ? user.email : ''}
               inputRef={email}
             />
             <TextField
@@ -140,7 +139,7 @@ export default function Profile() {
               autoComplete="age"
               color="secondary"
               autoFocus
-              defaultValue={user && user.age ? user.age : "18"}
+              defaultValue={user && user.age ? user.age : '18'}
               placeholder="7"
               inputRef={age}
             />
@@ -157,7 +156,7 @@ export default function Profile() {
               color="secondary"
               autoFocus
               placeholder="male"
-              defaultValue={user && user.genre ? user.genre : "male"}
+              defaultValue={user && user.genre ? user.genre : 'male'}
               inputRef={genre}
             >
               {genres.map((genre: GenreProps, i: number) => (
@@ -178,7 +177,7 @@ export default function Profile() {
               color="secondary"
               autoFocus
               placeholder="cll 33 # 47 - 89"
-              defaultValue={user && user.address ? user.address : ""}
+              defaultValue={user && user.address ? user.address : ''}
               inputRef={address}
             />
             <Button
@@ -189,11 +188,10 @@ export default function Profile() {
               className={classes.submit}
             >
               Save
-          </Button>
+            </Button>
           </form>
         </div>
-        <Box mt={8}>
-        </Box>
+        <Box mt={8}></Box>
       </Container>
     </React.Fragment>
   );

@@ -5,4 +5,4 @@ export type WellnessPlanProps = {
   duration: string;
   timesPerWeek: string;
   hasFavorite?: boolean;
-}
+};

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Avatar from '@material-ui/core/Avatar';
-import { useStyles } from "./MenuStyles";
-import { SimpleMenuProps } from "../../types/components/TypeSimpleMenuProps";
+import { useStyles } from './MenuStyles';
+import { SimpleMenuProps } from '../../types/components/TypeSimpleMenuProps';
 import { RootState } from '../../types/redux/TypeRootState';
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { UserProps } from '../../types/components/TypeUserProps';
 import { logIn } from '../../redux/actions';
 
@@ -23,8 +23,11 @@ function SimpleMenu({ handleChange, avatar }: SimpleMenuProps) {
 
   return (
     <React.Fragment>
-      <Avatar onClick={handleClick} className={classes.avatar} src={avatar ? avatar : ""}>
-      </Avatar>
+      <Avatar
+        onClick={handleClick}
+        className={classes.avatar}
+        src={avatar ? avatar : ''}
+      ></Avatar>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -32,8 +35,8 @@ function SimpleMenu({ handleChange, avatar }: SimpleMenuProps) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleChange("/profile")}>Profile</MenuItem>
-        <MenuItem onClick={() => handleChange("/logout")}>Logout</MenuItem>
+        <MenuItem onClick={() => handleChange('/profile')}>Profile</MenuItem>
+        <MenuItem onClick={() => handleChange('/logout')}>Logout</MenuItem>
       </Menu>
     </React.Fragment>
   );
@@ -42,13 +45,13 @@ function SimpleMenu({ handleChange, avatar }: SimpleMenuProps) {
 const mapStateToProps = (state: RootState) => {
   return {
     avatar: state.avatar,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     logIn: (user: UserProps) => dispatch(logIn(user) as any),
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleMenu);

@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   card: {
@@ -14,12 +14,12 @@ export const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   wellnessPlanButton: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   readMore: {
-    color: "blue"
+    color: 'blue',
   },
   button: {
-    alignContent: "center"
-  }
+    alignContent: 'center',
+  },
 }));
