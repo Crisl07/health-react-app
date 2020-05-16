@@ -1,4 +1,4 @@
-import { RouteProps } from './types/components/TypeRouteProps';
+import { RouteProps } from './types/components/RouteProps';
 import Sicknesses from './components/Sicknesses/Sicknesses';
 import MedicHistory from './components/MedicHistory/MedicHistory';
 import LogOut from './components/LogOut/LogOut';

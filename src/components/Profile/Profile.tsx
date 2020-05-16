@@ -4,9 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import { useStyles } from './ProfileStyles';
 import { Container, Button, Box, MenuItem } from '@material-ui/core';
-import { UserProps } from '../../types/components/TypeUserProps';
+import { UserProps } from '../../types/components/UserProps';
 import { getUserInfo, updateUser } from '../../api/profile';
-import { GenreProps } from '../../types/components/TypeGenreProps';
+import { GenreProps } from '../../types/components/GenreProps';
 import { history } from '../../App';
 
 const genres: GenreProps[] = [
@@ -55,7 +55,7 @@ export default function Profile() {
     try {
       await updateUser(newUserInfo);
       history.push('/signin');
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (

@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import LocalHospital from '@material-ui/icons/LocalHospital';
-import { SicknessProps } from '../../types/components/TypeSicknessProps';
+import { SicknessProps } from '../../types/components/SicknessProps';
 import { getAllSicknesses, addSicknessToUser } from '../../api/sicknesses';
 import { CardSickness } from '../CardSickness/CardSickness';
 import { useStyles } from './AllSicknessesStyles';
@@ -27,7 +27,7 @@ export default function AllSicknesses() {
   const handleAddSickness = async (id: string) => {
     try {
       await addSicknessToUser(id);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {

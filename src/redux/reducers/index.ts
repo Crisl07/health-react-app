@@ -1,7 +1,7 @@
 import { ActionTypes } from '../../types/redux/actionTypes';
-import { logOutActionProps } from '../../types/redux/TypeLogOutAction';
-import { logInActionProps } from '../../types/redux/TypeLoginActionProps';
-import { RootState } from '../../types/redux/TypeRootState';
+import { logOutActionProps } from '../../types/redux/LogOutAction';
+import { logInActionProps } from '../../types/redux/LoginActionProps';
+import { RootState } from '../../types/redux/RootState';
 
 const initialState = {
   isLoggedIn: false,

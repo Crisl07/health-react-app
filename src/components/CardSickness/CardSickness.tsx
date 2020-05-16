@@ -12,7 +12,7 @@ import { history } from '../../App';
 import Delete from '@material-ui/icons/Delete';
 import FitnessCenter from '@material-ui/icons/FitnessCenter';
 import Add from '@material-ui/icons/AddBox';
-import { CardSicknessProps } from '../../types/components/TypeCardSicknessProps';
+import { CardSicknessProps } from '../../types/components/CardSicknessProps';
 
 export const CardSickness = memo(
   ({
@@ -68,15 +68,15 @@ export const CardSickness = memo(
                 <Add />
               </Button>
             ) : (
-              <Button
-                onClick={() => deleteSickness!(id!)}
-                size="small"
-                color="secondary"
-                className={classes.wellnessPlanButton}
-              >
-                <Delete />
-              </Button>
-            )}
+                <Button
+                  onClick={() => deleteSickness!(id!)}
+                  size="small"
+                  color="secondary"
+                  className={classes.wellnessPlanButton}
+                >
+                  <Delete />
+                </Button>
+              )}
             <Button
               onClick={() => history.push(`/wellnessPlan/${id!}`)}
               size="small"

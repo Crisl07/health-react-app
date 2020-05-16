@@ -11,7 +11,7 @@ import FitnessCenter from '@material-ui/icons/FitnessCenter';
 import Add from '@material-ui/icons/AddBox';
 import { useStyles } from './WellnessPlanStyles';
 import { useParams } from 'react-router';
-import { WellnessPlanProps } from '../../types/components/TypeWellnessPlan';
+import { WellnessPlanProps } from '../../types/components/WellnessPlan';
 import {
   getSicknessWellnessActivities,
   addUserWellnessActivity,
@@ -30,7 +30,7 @@ export default function WellnessPlan() {
   const addFavorite = async (id: string) => {
     try {
       await addUserWellnessActivity(id);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {

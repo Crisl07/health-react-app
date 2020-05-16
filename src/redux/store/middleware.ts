@@ -1,4 +1,4 @@
-import { logInActionProps } from '../../types/redux/TypeLoginActionProps';
+import { logInActionProps } from '../../types/redux/LoginActionProps';
 import { ActionTypes } from '../../types/redux/actionTypes';
 import { setToken } from '../../api/auth';
 

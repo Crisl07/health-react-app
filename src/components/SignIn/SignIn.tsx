@@ -9,13 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useStyles } from './SignInStyles';
-import { AppProps } from '../../types/components/TypeAppProps';
+import { AppProps } from '../../types/components/AppProps';
 import { history } from '../../App';
-import { RootState } from '../../types/redux/TypeRootState';
+import { RootState } from '../../types/redux/RootState';
 import { Dispatch } from 'redux';
 import { logIn } from '../../redux/actions';
 import { connect } from 'react-redux';
-import { UserProps } from '../../types/components/TypeUserProps';
+import { UserProps } from '../../types/components/UserProps';
 
 function SignIn({ isLoggedIn, logIn }: AppProps) {
   const classes = useStyles();

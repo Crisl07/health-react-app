@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Healing from '@material-ui/icons/Healing';
 import { useStyles } from './MedicHistoryStyles';
 import { getUserMedicHistories } from '../../api/medicHistory';
-import { MedicHistoryProps } from '../../types/components/TypeMedicHistoryProps';
+import { MedicHistoryProps } from '../../types/components/MedicHistoryProps';
 
 export default function MedicHistory() {
   const classes = useStyles();

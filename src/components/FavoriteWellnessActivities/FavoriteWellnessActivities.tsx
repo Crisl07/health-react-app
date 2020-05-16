@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import FitnessCenter from '@material-ui/icons/FitnessCenter';
 import Star from '@material-ui/icons/Star';
 import { useStyles } from './FavoriteWellnessActivitiesStyles';
-import { WellnessPlanProps } from '../../types/components/TypeWellnessPlan';
+import { WellnessPlanProps } from '../../types/components/WellnessPlan';
 import {
   getUserWellnessActivities,
   deleteUserWellnessActivity,
@@ -31,7 +31,7 @@ export default function FavoriteWellnessActivities() {
         (activity: WellnessPlanProps) => activity.id !== id,
       );
       setFavoriteWellnessActivities(newFavoriteWellnessActivities);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {

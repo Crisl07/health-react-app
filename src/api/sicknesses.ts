@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SicknessProps } from '../types/components/TypeSicknessProps';
+import { SicknessProps } from '../types/components/SicknessProps';
 import { userId } from './auth';
 
 export const getUserSicknesses = (): Promise<SicknessProps[]> =>

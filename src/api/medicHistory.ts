@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { userId } from './auth';
-import { MedicHistoryProps } from '../types/components/TypeMedicHistoryProps';
+import { MedicHistoryProps } from '../types/components/MedicHistoryProps';
 
 export const getUserMedicHistories = (): Promise<MedicHistoryProps[]> =>
   axios

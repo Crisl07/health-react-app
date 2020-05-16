@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserProps } from '../types/components/TypeUserProps';
+import { UserProps } from '../types/components/UserProps';
 import { userId } from './auth';
 
 export const getUserInfo = (): Promise<UserProps> =>

@@ -11,12 +11,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useStyles } from './SignUpStyles';
 import { signUp } from '../../api/auth';
 import { history } from '../../App';
-import { RootState } from '../../types/redux/TypeRootState';
+import { RootState } from '../../types/redux/RootState';
 import { Dispatch } from 'redux';
 import { logIn } from '../../redux/actions';
 import { connect } from 'react-redux';
-import { UserProps } from '../../types/components/TypeUserProps';
-import { SignUpProps } from '../../types/components/TypeSignUpProps';
+import { UserProps } from '../../types/components/UserProps';
+import { SignUpProps } from '../../types/components/SignUpProps';
 
 function SignUp({ isLoggedIn }: SignUpProps) {
   const classes = useStyles();
@@ -40,7 +40,7 @@ function SignUp({ isLoggedIn }: SignUpProps) {
     try {
       await signUp(newUser);
       history.push('/signin');
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (

@@ -3,11 +3,11 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Avatar from '@material-ui/core/Avatar';
 import { useStyles } from './MenuStyles';
-import { SimpleMenuProps } from '../../types/components/TypeSimpleMenuProps';
-import { RootState } from '../../types/redux/TypeRootState';
+import { SimpleMenuProps } from '../../types/components/SimpleMenuProps';
+import { RootState } from '../../types/redux/RootState';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { UserProps } from '../../types/components/TypeUserProps';
+import { UserProps } from '../../types/components/UserProps';
 import { logIn } from '../../redux/actions';
 
 function SimpleMenu({ handleChange, avatar }: SimpleMenuProps) {

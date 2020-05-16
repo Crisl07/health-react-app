@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { LogOutProps } from '../../types/components/TypeLogOutProps';
+import { LogOutProps } from '../../types/components/LogOutProps';
 import { logOut } from '../../redux/actions';
 import { history } from '../../App';
 

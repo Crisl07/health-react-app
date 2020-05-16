@@ -1,4 +1,4 @@
-import { LogInProps } from './TypeLoginProps';
+import { LogInProps } from './LoginProps';
 import { ActionTypes } from './actionTypes';
 
 export type logInActionProps = {

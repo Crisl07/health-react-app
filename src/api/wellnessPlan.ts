@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { WellnessPlanProps } from '../types/components/TypeWellnessPlan';
+import { WellnessPlanProps } from '../types/components/WellnessPlan';
 import { userId } from './auth';
 
 export const getSicknessWellnessActivities = (

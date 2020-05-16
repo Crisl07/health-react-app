@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './SicknessesStyles';
-import { SicknessProps } from '../../types/components/TypeSicknessProps';
+import { SicknessProps } from '../../types/components/SicknessProps';
 import { getUserSicknesses, deleteUserSickness } from '../../api/sicknesses';
 import { CardSickness } from '../CardSickness/CardSickness';
 import { history } from '../../App';
@@ -27,7 +27,7 @@ export default function Sicknesses() {
         (sickness: SicknessProps) => sickness.id !== id,
       );
       setSicknesses(newUserSicknesses);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handleSicknessFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
