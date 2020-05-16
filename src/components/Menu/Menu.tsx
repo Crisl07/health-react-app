@@ -12,8 +12,8 @@ import { logIn } from '../../redux/actions';
 
 function SimpleMenu({ handleChange, avatar }: SimpleMenuProps) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const handleClick = (event: any) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 

@@ -15,12 +15,11 @@ export function ForgetPassword() {
   const classes = useStyles();
   const email = useRef<HTMLInputElement>(null);
 
-  const recoverPassword = (e: React.FormEvent<HTMLFormElement>) => {
+  const recoverPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const user = {
-      email: email.current!.value,
-    };
-    forgetPassword(user);
+    try {
+      await forgetPassword(email.current!.value);
+    } catch (error) { }
   };
 
   return (

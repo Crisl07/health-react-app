@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { UserProps } from '../types/components/UserProps';
+import { NewPasswordProps } from '../types/components/NewPasswordProps';
 import { history } from '../App';
 
 let userId: number;
@@ -10,17 +11,17 @@ const signUp = async (newUser: UserProps) =>
 const signIn = async (user: UserProps) =>
   await axios.post('http://localhost:5001/api/v1.0/login', user);
 
-const forgetPassword = async (email: any) => {
+const forgetPassword = async (email: string) => {
   await axios.post(
     'http://localhost:5001/api/v1.0/auth/forgot_password',
-    email,
+    { email },
   );
 };
 
-const resetPassword = async (newPasswordProperties: any) => {
+const resetPassword = async (newPasswordProps: NewPasswordProps) => {
   await axios.post(
     'http://localhost:5001/api/v1.0/auth/reset_password',
-    newPasswordProperties,
+    newPasswordProps,
   );
 };
 

@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 import { history } from '../App';
 import { toast } from 'react-toastify';
 
 export const useAxiosInterceptor = () => {
   axios.interceptors.response.use(
-    (response: any) => {
+    (response: AxiosResponse) => {
       const { status } = response;
 
       if (status >= 200 && typeof response.data === 'string') {
@@ -13,29 +13,27 @@ export const useAxiosInterceptor = () => {
 
       return response;
     },
-    (error: any) => {
-      const { status } = error.response;
+    (error: AxiosError) => {
+      const response = error.response;
 
-      if (status === 401) {
+      if (response && response.status === 401) {
         toast.error("Session lost. We're sorry, You have to login again.");
         history.push('/logout');
       }
 
-      if (status === 400) {
-        toast.error(error.response.data);
-      }
+      if (response && response.status === 400) toast.error(error.response!.data);
 
-      if (status === 403) {
+      if (response && response.status === 403) {
         toast.error('Login is required');
         history.push('/logout');
       }
 
-      if (status >= 400) {
-        toast.error(error.response.data);
+      if (response && response.status >= 400) {
+        toast.error(error.response!.data);
         history.push('/logout');
       }
 
-      if (status >= 500) toast.error('Something went wrong');
+      if (response && response.status >= 500) toast.error('Something went wrong');
     },
   );
 };

@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { NewPasswordProps } from "../../types/components/NewPasswordProps";
 import { useLocation } from 'react-router';
 import { useStyles } from './ResetPasswordStyles';
 import { resetPassword } from '../../api/auth';
@@ -23,13 +24,13 @@ export function ResetPassword() {
       return toast.error('Passwords do not match');
     }
     let token = location.search.split('=')[1];
-    const newPasswordProperties = {
+    const newPasswordProps: NewPasswordProps = {
       token,
       newPassword: password.current!.value,
       verifyPassword: passwordConfirm.current!.value,
     };
     try {
-      await resetPassword(newPasswordProperties);
+      await resetPassword(newPasswordProps);
     } catch (error) {
     } finally {
       history.push('/signin');
